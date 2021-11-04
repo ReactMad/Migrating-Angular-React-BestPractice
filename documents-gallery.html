@@ -1,0 +1,57 @@
+<div class="empty documents__empty-states" ng-if="$ctrl.getImages().length === 0 && $ctrl.getDocuments().length === 0">
+    <div class="empty-icon">
+        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-file-earmark-richtext" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        </svg>
+    </div>
+    <p class="empty-title h4">
+       No documents
+    </p>
+    <p class="empty-subtitle">Click the button to attach file</p>
+    <div class="empty-action">
+        <button class="btn btn-primary" ng-click="$ctrl.attachImage()">
+            <i class="glyphicon glyphicon-plus"></i> Attach file
+        </button>
+    </div>
+</div>
+<div class="table-responsive document-list" ng-if="$ctrl.getImages().length > 0 || $ctrl.getDocuments().length > 0" style="margin-top: 20px;">
+    <h3> Images </h3>
+    <div class="documents-img-box">
+        <div ng-repeat="doc in $ctrl.getImages()" class="img-box">
+
+            <img render-image-blob="doc.blob" style="max-width: 100%; max-height: 100%;cursor: pointer;"
+                ng-click="$ctrl.viewImageClick(doc)" />
+            <div class="img-box-details">
+                <span>
+                    <p ng-click="$ctrl.editImageClick(doc)" class="documents__edit-image-button">{{$ctrl.getDocumentHeading(doc)}}</p>
+                </span>
+                <p class="documents__description">{{doc.description}}</span>
+                <div class="img-box-dlt">
+                    <button type="button" class="btn  dlt-btn" ng-click="$ctrl.deleteImageClick(doc)" title="Delete">
+                        <i class="glyphicon glyphicon-trash" style="float: right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3>Documents</h3>
+        <div class="documents-pdf-box">
+            <div ng-repeat="doc in $ctrl.getDocuments()" class="pdf-box">
+                <span>Type: {{$ctrl.getDocumentType(doc)}}</span>
+                <div class="svg-box">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-text" style="cursor: pointer;" ng-click="$ctrl.viewImageClick(doc)"></svg>                                            
+                </div>
+                <div class="pdf-box-details">
+                    <p ng-click="$ctrl.editImageClick(doc)" class="documents__edit-image-button">{{$ctrl.getDocumentHeading(doc)}}</p>
+                    <p class="documents__description">{{doc.description}}</p>
+                    <div class="pdf-box-dlt">
+                        <button type="button" class="btn  dlt-btn" ng-click="$ctrl.deleteImageClick(doc)"
+                            title="Delete">
+                            <i class="glyphicon glyphicon-trash" style="float: right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
